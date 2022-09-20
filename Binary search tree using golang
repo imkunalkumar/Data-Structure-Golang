@@ -1,0 +1,57 @@
+package main
+
+import "fmt"
+
+type node struct {
+	data  int
+	left  *node
+	right *node
+}
+
+type tree struct {
+	root *node
+}
+
+func (t *tree) insert(data int) {
+	temp := &node{data: data,
+		left:  nil,
+		right: nil}
+	if t.root == nil {
+		t.root = temp
+	} else {
+		t.root.insert(data)
+	}
+}
+func (n *node) insert(data int) {
+	temp := &node{
+		data:  data,
+		left:  nil,
+		right: nil,
+	}
+	if n.data > data {
+		if n.left == nil {
+			n.left = temp
+		} else {
+			n.insert(data)
+		}
+	} else {
+
+		if n.right == nil {
+			n.right = temp
+		} else {
+			n.insert(data)
+		}
+	}
+
+}
+func main() {
+	tr := &tree{}
+	tr.insert(5)
+	tr.insert(4)
+	tr.insert(6)
+
+	fmt.Println(tr.root.data)
+	fmt.Println(tr.root.right.data)
+	fmt.Println(tr.root.left.data)
+
+}
